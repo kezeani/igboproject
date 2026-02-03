@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+
+{% block title %}Quiz - Igbo Project{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Ajụjụ Ọmụma</h2>
+
+  <div class="row gy-4" id="quizContainer">
+      <!-- Quiz will be inserted dynamically -->
+  </div>
+</div>
+
+<!-- Score Display -->
+<div id="scoreSection" class="alert alert-info d-none" role="alert">
+    <h4 class="alert-heading">Quiz Complete!</h4>
+    <p id="scoreText"></p>
+</div>
+
+<!-- Action Buttons -->
+<div class="d-flex justify-content-between align-items-center mb-5">
+    <button type="button" class="btn btn-secondary" onclick="window.history.back();">Back</button>
+    <button type="button" class="btn btn-success btn-lg" onclick="gradeQuiz()">Submit Quiz</button>
+</div>
+
+<script>
+// ========== IGBO DICTIONARY ==========
+const igboDict = {{ word_list|tojson }};
+
+// ===== Utility =====
+function getRandomItems(arr, count) {
+    return arr.sort(() => 0.5 - Math.random()).slice(0, count);
+}
+
+function shuffle(arr) {
+    return arr.sort(() => 0.5 - Math.random());
+}
+
+// ===== Generate Quiz Layout =====
+function loadQuiz() {
+    const quizDiv = document.getElementById("quizContainer");
+    const igboWords = Object.keys(igboDict);
+    const englishWords = Object.values(igboDict);
+
+    const selected = getRandomItems(igboWords, 10);
+
+    selected.forEach((word, index) => {
+        const correct = igboDict[word];
+        const incorrect = getRandomItems(
+            englishWords.filter(x => x !== correct),
+            3
+        );
+        const options = shuffle([correct, ...incorrect]);
+
+        const col = document.createElement("div");
+        col.className = "col-md-6";
+
+        let html = `<h5>${index + 1}. Kedu ihe ọ pụtara "<b>${word}</b>"?</h5>`;
+
+        options.forEach((opt, i) => {
+            const id = `q${index + 1}_${i}`;
+            html += `
+              <div class="form-check">
+                <input type="radio" 
+                       name="q${index + 1}" 
+                       id="${id}" 
+                       class="form-check-input"
+                       value="${opt}">
+                <label for="${id}" class="form-check-label">${opt}</label>
+              </div>
+            `;
+        });
+
+        col.innerHTML = html;
+        quizDiv.appendChild(col);
+    });
+}
+
+// ===== Scoring =====
+function gradeQuiz() {
+    let score = 0;
+
+    const igboWords = Object.keys(igboDict);
+    const selected = Array.from(document.querySelectorAll("[name^='q']")).length / 4;
+
+    for (let i = 1; i <= 10; i++) {
+        const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!selectedOption) continue;
+
+        const igboWord = document.querySelectorAll("#quizContainer .col-md-6")[i-1]
+                           .querySelector("h5 b").textContent;
+
+        const correctAnswer = igboDict[igboWord];
+        if (selectedOption.value === correctAnswer) {
+            score++;
+        }
+    }
+
+    document.getElementById("scoreText").textContent =
+        `You scored ${score} out of 10.`;
+
+    document.getElementById("scoreSection").classList.remove("d-none");
+}
+
+loadQuiz();
+</script>
+
+{% endblock %}

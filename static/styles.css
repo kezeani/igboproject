@@ -1,0 +1,160 @@
+.header{
+    text-align: center;
+    font-family: roboto;
+}
+
+.container-fluid{
+    background-color: black;
+    margin-bottom: 0.1rem;
+    padding: 0.3rem 1rem;
+    width: 100%;
+}
+
+.navbar{
+    width: 100%;
+}
+
+.nav-link{
+    color: white;
+    width: 100%;
+}
+
+.main-img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pics{
+    height: 80px;
+    width: 120px;
+}
+
+p {
+    text-align: center;
+}
+
+.table{
+    width: 40%;
+    text-align: center;
+    margin-left: 100px;
+
+}
+
+td{
+    font-size: 20px;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.card-body{
+    text-align: center;
+}
+
+.card-title{
+    color: rgb(161, 77, 32);
+}
+
+.card-text{
+    color: rgb(161, 101, 32);
+}
+
+.card-img-top{
+    height: 300px;
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card{
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body{
+    background-color: maroon;
+}
+
+a{
+    font-size: 20px;
+}
+
+.col-md-6{
+    width: 50%;
+}
+
+th.row{
+    margin-right: auto;
+}
+
+.playertable{
+    width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul.navbar-nav a:hover{
+    color: maroon !important;
+}
+
+.apology{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flashcard {
+  width: 320px;
+  height: 200px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flashcard-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.flashcard.flipped .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  background: white;
+}
+
+.flashcard-front {
+  background-color: #198754;
+}
+
+.flashcard-back {
+  transform: rotateY(180deg);
+  background-color: #198754;
+  color: white;
+}
+
+.vocab-theme .list-group-item {
+  background-color: #1e1e1e;   /* dark background */
+  color: #f1f1f1;              /* light text */
+  border-color: #333;
+}
+
+.vocab-theme strong {
+  color: #158604;              /* highlight Igbo word */
+}
+
+.vocab-theme span {
+  color: #adb5bd;              /* softer English text */
+}

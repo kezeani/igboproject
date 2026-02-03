@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home - Igbo Project{% endblock %}
+
+{% block content %}
+  <div class="jumbotron bg-transparent border-0 container text-center">
+    <h1 class="display-4">Ndeewo! Họrọ isiokwu wee malite mmụta!</h1>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <div class="card" style="width: 16rem; justify-content: center;">
+        <img class="card-img-top" src="{{ url_for('static', filename='images/igbo_family.jpg') }}" alt="Igbo Family">
+        <div class="card-body">
+          <h5 class="card-title">Ezi N'Ulọ</h5>
+          <p class="card-text">Ndị anyị kacha hụ n'anya.</p>
+          <a href="/slides/ezinaulo" class="btn btn-primary">Ga!</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="card" style="width: 16rem;">
+        <img class="card-img-top" src="{{ url_for('static', filename='images/ahuike.jpeg') }}" alt="Woman with Doctor">
+        <div class="card-body">
+          <h5 class="card-title">Ahụ Ike</h5>
+          <p class="card-text">Mụta banyere ahụike na ọrịa.</p>
+          <a href="/slides/ahụike" class="btn btn-primary">Ga!</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <div class="card" style="width: 16rem;">
+        <img class="card-img-top" src="{{ url_for('static', filename='images/akuku_ahu.jpg') }}" alt="Body Parts">
+        <div class="card-body">
+          <h5 class="card-title">Akụkụ Ahụ</h5>
+          <p class="card-text">Mụta banyere akụkụ ahụ anyi.</p>
+          <a href="/slides/akụkụ_ahụ" class="btn btn-primary">Ga!</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-3">
+      <div class="card" style="width: 16rem;">
+        <img class="card-img-top" src="{{ url_for('static', filename='images/anumanu.jpg') }}" alt="Lion in the Wild">
+        <div class="card-body">
+          <h5 class="card-title">Anụmanụ</h5>
+          <p class="card-text">Mụta banyere anụmanụ dị iche iche.</p>
+          <a href="/slides/anụmanụ" class="btn btn-primary">Ga!</a>
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+
+{% endblock %}
+
+<div class="col">
+      <div class="card">
+        <!-- <img src="/static/messi.jpg" class="card-img-top" alt="Players"> -->
+        <div class="card-body">
+          <h5 class="card-title">Intermediate</h5>
+          <p class="card-text"></p>
+          <a href="/intermediate" class="btn btn-primary">Ga!</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <!-- <img src="/static/trophy.webp" class="card-img-top" alt="Game"> -->
+        <div class="card-body">
+          <h5 class="card-title">Advanced</h5>
+          <p class="card-text"></p>
+          <a href="/advanced" class="btn btn-warning">Ga!</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <!-- <img src="/static/trophy.webp" class="card-img-top" alt="Game"> -->
+        <div class="card-body">
+          <h5 class="card-title">About</h5>
+          <p class="card-text"></p>
+          <a href="/about" class="btn btn-warning">Ga!</a>
+        </div>
+      </div>
+    </div>

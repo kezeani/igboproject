@@ -1,0 +1,63 @@
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>{% block title %}Igbo Project{% endblock %}</title>
+		<link rel="stylesheet" href="{{ url_for('bootstrap_files', filename='css/bootstrap.min.css') }}">
+		<!-- Project stylesheet: ensure it loads after Bootstrap so it can override defaults -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+		<style>
+			/* Dark green page background */
+			html, body {
+				height: 100%;
+				background-color: #0b3d02; /* dark green */
+				color: #f8f9fa;
+			}
+			/* Ensure main content contrasts with the background */
+			.page-content {
+				padding: 2rem 1rem;
+			}
+			/* Make dropdown links readable on dark navbar */
+			.navbar .dropdown-menu {
+				background-color: #000; /* black dropdown background */
+			}
+			.navbar .dropdown-item {
+				color: #f8f9fa;
+			}
+			.navbar .dropdown-item:hover {
+				background-color: rgba(255,255,255,0.05);
+			}
+		</style>
+	</head>
+	<body>
+
+		<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
+			<a class="navbar-brand" href="/">Oru Igbo Kachi</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!-- <div class="collapse navbar-collapse" id="mainNavbar">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="/">Họrọ Ngosi</a>
+					</li>
+				</ul>
+			</div> -->
+		</nav>
+
+		<main class="container page-content">
+			{% block content %}
+			<!-- Page content goes here -->
+			{% endblock %}
+		</main>
+
+		<!-- jQuery is required by Bootstrap 4's JS (dropdowns, collapse) -->
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+		<script src="{{ url_for('bootstrap_files', filename='js/bootstrap.bundle.min.js') }}"></script>
+	</body>
+</html>
+
+

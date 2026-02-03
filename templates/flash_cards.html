@@ -1,0 +1,69 @@
+{% extends 'layout.html' %}
+
+{% block title %}Flash Cards - Igbo Project{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4 vocab-theme">
+  <div class="container mt-4">
+    <h1>Kaadị Ịmụta {{ slide_title }}</h1>
+    <br>
+    <div class="d-flex justify-content-center">
+        <div class="flashcard" onclick="flipCard()">
+            <div class="flashcard-inner" id="flashcardInner">
+                <div class="flashcard-front d-flex align-items-center justify-content-center">
+                    <h3 id="igboWord"></h3>
+                </div>
+                <div class="flashcard-back d-flex align-items-center justify-content-center">
+                    <h4 id="englishWord"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-primary mt-4" onclick="nextCard()">Next</button>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <button class="btn btn-secondary" onclick="window.history.back();">Laghachi</button>
+    <button class="btn btn-info" onclick="window.location.href='/slides/{{ pdf_name }}'">Ọkwu Niile</button>
+    <button class="btn btn-success" onclick="window.location.href='/quiz/{{ pdf_name }}'">Ajụjụ Ọmụma</button>
+  </div>
+</div>
+
+
+<script>
+const wordDict = {{ word_list|tojson }};
+
+const keys = Object.keys(wordDict);
+let currentKey = null;
+
+function getRandomKey() {
+    return keys[Math.floor(Math.random() * keys.length)];
+}
+
+function loadCard() {
+    currentKey = getRandomKey();
+    document.getElementById("igboWord").textContent = currentKey;
+    document.getElementById("englishWord").textContent = wordDict[currentKey];
+
+    // Reset flip
+    document.querySelector(".flashcard").classList.remove("flipped");
+}
+
+function flipCard() {
+    document.querySelector(".flashcard").classList.toggle("flipped");
+}
+
+function nextCard() {
+    loadCard();
+}
+
+// Load first card
+loadCard();
+
+</script>
+{% endblock %}

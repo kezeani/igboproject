@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block title %}Slides - Igbo Project{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4 vocab-theme">
+  <div class="container mt-4">
+    <h1>Okwu {{ slide_title }}</h1>
+
+    <ul class="list-group mb-3" id="vocabList"></ul>
+
+    <nav>
+      <ul class="pagination justify-content-center" id="pagination"></ul>
+    </nav>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <button class="btn btn-secondary" onclick="window.history.back();">Laghachi</button>
+    <button class="btn btn-info" onclick="window.location.href='/flash_cards/{{ pdf_name }}'">Kaadị Ịmụta</button>
+    <button class="btn btn-success" onclick="window.location.href='/quiz/{{ pdf_name }}'">Ajụjụ Ọmụma</button>
+  </div>
+</div>
+
+
+<script>
+const wordDict = {{ word_list|tojson }};
+
+const keys = Object.keys(wordDict);
+let currentKey = null;
+
+function getRandomKey() {
+    return keys[Math.floor(Math.random() * keys.length)];
+}
+
+const entries = Object.entries(wordDict); // [ [igbo, english], ... ]
+
+const itemsPerPage = 10;
+let currentPage = 1;
+
+function renderPage(page) {
+    const list = document.getElementById("vocabList");
+    list.innerHTML = "";
+
+    const start = (page - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+
+    entries.slice(start, end).forEach(([igbo, english]) => {
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between";
+        li.innerHTML = `<strong>${igbo}</strong><span>${english}</span>`;
+        list.appendChild(li);
+    });
+
+    renderPagination();
+}
+
+function renderPagination() {
+    const totalPages = Math.ceil(entries.length / itemsPerPage);
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+
+    for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement("li");
+        li.className = `page-item ${i === currentPage ? "active" : ""}`;
+
+        li.innerHTML = `
+            <a class="page-link" href="#">${i}</a>
+        `;
+
+        li.onclick = (e) => {
+            e.preventDefault();
+            currentPage = i;
+            renderPage(currentPage);
+        };
+
+        pagination.appendChild(li);
+    }
+}
+
+renderPage(currentPage);
+
+</script>
+{% endblock %}
