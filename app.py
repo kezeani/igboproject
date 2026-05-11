@@ -1,5 +1,6 @@
 from flask import Flask, render_template, send_file, send_from_directory, abort
 import os
+import json
 from igbo_words import word_lists
 
 app = Flask(__name__)
@@ -50,13 +51,17 @@ slide_titles = {
 	'akụkụ_ahụ': 'Akụkụ Ahụ',
 	'ezinaulo': 'Ezi N\'Ulọ',
 	'mmemme': 'Mmemme Igbo',
-    'anụmanụ': 'Anụmanụ'
+    'anụmanụ': 'Anụmanụ',
+    'onu_ogugu': 'Ọnụ Ọgụgụ',
+    'aha_otutu': 'Aha Ọtutu',
+    'niile': 'Niile'
 }
 
 @app.route('/slides')
 @app.route('/slides/<pdf_name>')
 def slides(pdf_name='default'):
-    return render_template('slides.html', pdf_name=pdf_name, slide_title=slide_titles.get(pdf_name, pdf_name), word_list=word_lists[pdf_name] if pdf_name in word_lists else {})
+    sort = False if pdf_name in ['onu_ogugu', 'niile'] else True
+    return render_template('slides.html', pdf_name=pdf_name, slide_title=slide_titles.get(pdf_name, pdf_name), word_list=json.dumps(word_lists[pdf_name], sort_keys=sort) if pdf_name in word_lists else {})
 
 @app.route('/flash_cards')
 @app.route('/flash_cards/<pdf_name>')
